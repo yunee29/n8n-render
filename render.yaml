@@ -1,0 +1,11 @@
+services:
+  - type: web_service
+    name: n8n-render
+    env: docker
+    plan: free
+    repo: https://github.com/YOUR_USERNAME/n8n-render.git
+    branch: main
+    dockerComposeFilePath: docker-compose.yml
+    envVars:
+      - key: N8N_PASSWORD
+        sync: false
