@@ -6,12 +6,19 @@ services:
     ports:
       - "5678:5678"
     environment:
-      - N8N_HOST=n8n.onrender.com
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=https
       - GENERIC_TIMEZONE=Asia/Seoul
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=admin
       - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
     volumes:
       - ./.n8n:/home/node/.n8n
+
+  # (선택) PostgreSQL 연동 예시
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=n8n
+      - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - POSTGRES_DB=n8n
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
