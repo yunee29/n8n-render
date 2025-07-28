@@ -1,12 +1,17 @@
+# render.yaml
 services:
-  - type: docker-compose
+  - type: web_service
     name: n8n-render
+    env: docker
+    plan: free
     repo: https://github.com/YOUR_USERNAME/n8n-render.git
     branch: main
-    dockerComposeFilePath: docker-compose.yml
+    # Dockerfile 대신 Docker Compose 쓸 수도 있지만, Compose 모드가 보이지 않으면
+    # 간단히 Dockerfile 한 개로 띄우는 게 안정적입니다.
+    dockerfilePath: Dockerfile
     envVars:
       - key: N8N_PASSWORD
         sync: false
+      # Postgres 쓴다면:
       - key: POSTGRES_DB_PASSWORD
-        sync: false  # PostgreSQL 사용 시
-    plan: free
+        sync: false
